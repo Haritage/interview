@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국부동산원 PT & 통계 직무 면접 지식 베이스</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --concept-bg: #f0fdf4;
+            --concept-border: #86efac;
+            --concept-text: #166534;
+            --group-bg: #eff6ff;
+            --group-border: #bfdbfe;
+            --group-text: #1e40af;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .header-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .title-area {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            color: #0f172a;
+        }
+
+        .author-badge {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background-color: #f1f5f9;
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            font-weight: 500;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #f1f5f9;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+            padding-bottom: 1px;
+        }
+
+        .tab-btn {
+            padding: 0.6rem 1rem;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 1.5rem auto 0;
+            padding: 0 1rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+
+        .card-header {
+            padding: 0.9rem 1.25rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--card-bg);
+            user-select: none;
+        }
+
+        .card-header:hover {
+            background-color: #f8fafc;
+        }
+
+        .question {
+            font-weight: 600;
+            color: #0f172a;
+            font-size: 0.95rem;
+            padding-right: 1rem;
+        }
+
+        .toggle-icon {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            transition: transform 0.2s;
+        }
+
+        .card.open .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .card-body {
+            padding: 0 1.25rem 1.25rem 1.25rem;
+            display: none;
+            white-space: pre-wrap;
+            color: #334155;
+            font-size: 0.92rem;
+            line-height: 1.65;
+        }
+
+        .card.open .card-body {
+            display: block;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 0.9rem;
+        }
+
+        .card.concept-accordion {
+            border: 1px solid var(--concept-border);
+            background-color: var(--concept-bg);
+        }
+
+        .card.concept-accordion .card-header {
+            background-color: var(--concept-bg);
+        }
+
+        .card.concept-accordion .question {
+            color: var(--concept-text);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .card.concept-accordion .question::before {
+            content: "💡";
+        }
+
+        .card.concept-accordion .card-body {
+            background-color: #ffffff;
+            color: #1e293b;
+        }
+
+        .concept-card {
+            background-color: var(--concept-bg);
+            border: 1px solid var(--concept-border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--concept-text);
+        }
+
+        .concept-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .concept-card h3::before {
+            content: "💡";
+        }
+
+        .concept-card > div {
+            white-space: pre-line;
+        }
+
+        table.concept-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.75rem;
+            background-color: #ffffff;
+            color: #1e293b;
+            font-size: 0.85rem;
+        }
+
+        table.concept-table th, table.concept-table td {
+            border: 1px solid #cbd5e1;
+            padding: 0.5rem 0.6rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        table.concept-table th {
+            background-color: #e2e8f0;
+            font-weight: 600;
+        }
+
+        .keyword-group {
+            border: 1px solid var(--group-border);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .keyword-header {
+            background-color: var(--group-bg);
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            color: var(--group-text);
+            font-size: 1.05rem;
+            user-select: none;
+        }
+
+        .keyword-header:hover {
+            background-color: #dbeafe;
+        }
+
+        .keyword-content {
+            display: none;
+            padding: 1rem;
+            background-color: #fafafa;
+            border-top: 1px solid var(--group-border);
+        }
+
+        .keyword-group.open .keyword-content {
+            display: block;
+        }
+
+        .keyword-group.open .keyword-header .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 640px) {
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .search-box, .btn-group {
+                width: 100%;
+            }
+            .btn-group .btn {
+                flex: 1;
+            }
+            table.concept-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <div class="title-area">
+            <h1>한국부동산원 PT & 통계 직무 면접 지식 베이스</h1>
+            <span class="author-badge">한국부동산원 통계 직무</span>
+        </div>
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="검색어를 입력하세요 (예: LTV, DSR, 공시가격, 반복매매, p-value)..." onkeyup="handleSearch()">
+            </div>
+            <div class="btn-group">
+                <button class="btn" onclick="expandAll()">전체답변열기</button>
+                <button class="btn" onclick="collapseAll()">전체답변닫기</button>
+            </div>
+        </div>
+        <nav class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab(event, 'tab-flow')">1. 기본적인 순서 흐름</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-group')">2. 관련개념 그룹핑</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-concept')">💡 주요 개념 정리 (*)</button>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section id="tab-flow" class="tab-content active"></section>
+    <section id="tab-group" class="tab-content"></section>
+    <section id="tab-concept" class="tab-content"></section>
+
+    <div id="noResults" class="no-results" style="display: none;">
+        검색 결과가 없습니다.
+    </div>
+</main>
+
+<script>
+const rawData = [
+    // --- 개념 도표 1 ---
+    {
+        type: "concept",
+        id: "c1",
+        title: "* 주요 부동산 금융 및 대출 규제 지표 (LTV, DTI, DSR)",
+        content: `
+<table class="concept-table">
+    <thead>
+        <tr>
+            <th>지표</th>
+            <th>풀이 (Full Name)</th>
+            <th>산정 방식 및 핵심 개념</th>
+            <th>정책적 목적</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>LTV</b></td>
+            <td>Loan to Value</td>
+            <td>(주택담보대출금액 / 담보가치) × 100</td>
+            <td>부동산 담보가치 대비 대출 한도 제한하여 금융기관 부실 방지</td>
+        </tr>
+        <tr>
+            <td><b>DTI</b></td>
+            <td>Debt to Income</td>
+            <td>{(주담대 원리금 상환액 + 기타대출 이자) / 연소득} × 100</td>
+            <td>차주의 소득 수준에 맞춘 원리금 상환 능력 검증</td>
+        </tr>
+        <tr>
+            <td><b>DSR</b></td>
+            <td>Debt Service Ratio</td>
+            <td>{(모든 대출의 원리금 상환액) / 연소득} × 100</td>
+            <td>모든 원리금 부담을 합산하여 가계부채 총량 관리 강화</td>
+        </tr>
+    </tbody>
+</table>`,
+        rawText: "LTV DTI DSR 주택담보대출 가계부채 대출규제 금융지표",
+        keywords: ["부동산 정책 및 금융"]
+    },
+    // --- QA 예시 모음 ---
+    {
+        type: "qa",
+        id: "q1",
+        q: "Q1. LTV, DTI, DSR의 차이점과 부동산 시장에 미치는 영향에 대해 설명해보세요.",
+        a: "A. LTV는 부동산 담보가치를 기준으로 대출 한도를 정하는 규제이며, DTI와 DSR은 차주의 소득 대비 상환 능력을 기준으로 대출 한도를 정합니다.\n특히 DSR은 주택담보대출뿐만 아니라 신용대출 등 모든 대출의 원리금 상환액을 합산하므로 차주의 실질적 부채 상환 능력을 가장 엄격하게 평가합니다.\n이들 규제 강화는 투기적 수요 차단과 가계부채 안정화에는 효과적이지만, 무주택 실수요자의 내 집 마련 문턱을 높일 수 있으므로 핀셋형 완화 조치가 조화롭게 병행되어야 합니다.",
+        keywords: ["부동산 정책 및 금융"]
+    },
+    {
+        type: "concept",
+        id: "c2",
+        title: "* 공시가격 체계 및 산정 절차 (표준지/표준주택 vs 개별공시가격)",
+        content: `
+<table class="concept-table">
+    <thead>
+        <tr>
+            <th>구분</th>
+            <th>표준지 / 표준주택 공시가격</th>
+            <th>개별공시지가 / 개별주택가격</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>주체</b></td>
+            <td>국토교통부장관 (한국부동산원 조사·산정)</td>
+            <td>시·군·구청장 (부동산가격공시위원회 심의)</td>
+        </tr>
+        <tr>
+            <td><b>대상</b></td>
+            <td>대표성이 있는 표준지/표준주택 표본</td>
+            <td>전국 모든 개별 토지 및 주택</td>
+        </tr>
+        <tr>
+            <td><b>활용</b></td>
+            <td>개별가격 산정 기준, 부동산 시장 가격 정보 제공</td>
+            <td>재산세, 종합부동산세, 건강보험료 등 과세 및 부담금 부과 기준</td>
+        </tr>
+    </tbody>
+</table>`,
+        rawText: "공시가격 표제지 개별공시지가 종부세 재산세 부동산가격공시 한국부동산원",
+        keywords: ["공시가격 및 평가"]
+    },
+    {
+        type: "qa",
+        id: "q2",
+        q: "Q2. 한국부동산원의 공시가격 조사·산정 과정에서 데이터 품질 관리 방안은 무엇인가요?",
+        a: "A. 한국부동산원은 실거래가 정보, 시세 조사 데이터, 공간정보(GIS) 등을 다각도로 연계하여 공시가격의 형평성과 정확성을 확보합니다.\n이상치 검증 모듈을 이용해 지역별·유형별 가격 변동률의 급격한 편차를 자동으로 추출하고, 현장 검증 및 외부 전문가 검증 단계를 거쳐 적정성을 심의합니다.\n특히 GIS 기반의 공간 데이터 분석을 통해 인접 필지 간 가격 역전 현상이나 형평성 오류를 사전에 필터링하고 있습니다.",
+        keywords: ["공시가격 및 평가", "데이터 품질 관리"]
+    },
+    {
+        type: "concept",
+        id: "c3",
+        title: "* 부동산 가격지수 산정 모형 비교 (반복매매 vs 헤도닉 모형)",
+        content: `
+<table class="concept-table">
+    <thead>
+        <tr>
+            <th>구분</th>
+            <th>반복매매 모형 (Repeat Sales)</th>
+            <th>헤도닉 가격 모형 (Hedonic Price)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>핵심 산정 방식</b></td>
+            <td>동일 부동산이 2회 이상 거래된 쌍(Pair)을 비교하여 지수 산출</td>
+            <td>부동산의 물리적·환경적 특성 변수를 회귀분석하여 가격 추정</td>
+        </tr>
+        <tr>
+            <td><b>장점</b></td>
+            <td>부동산 특성의 비동질성을 통제 가능하며 구조가 비교적 직관적임</td>
+            <td>거래가 적은 지역이나 기간에도 특성 변수를 활용해 가격산정 가능</td>
+        </tr>
+        <tr>
+            <td><b>단점</b></td>
+            <td>거래쌍 부족 시 표본 선택 편향 발생, 리모델링 등 품질변화 미반영</td>
+            <td>모든 주요 특성 변수를 수집·통제하기 어려워 생략변수 편향 발생 위험</td>
+        </tr>
+    </tbody>
+</table>`,
+        rawText: "반복매매모형 헤도닉가격모형 주택가격동향조사 실거래가지수 부동산통계",
+        keywords: ["부동산 통계 산정론"]
+    },
+    {
+        type: "qa",
+        id: "q3",
+        q: "Q3. 시계열 부동산 데이터 분석 시 비정상성(Non-stationarity) 문제 해결 방안은?",
+        a: "A. 부동산 가격 및 거래량 시계열은 일반적으로 추세나 계절성을 가져 비정상성을 띱니다. 이를 그대로 회귀분석하면 허구적 회귀(Spurious Regression) 문제가 발생합니다.\n따라서 ADF(Augmented Dickey-Fuller) 검정을 통해 단위근 존재 여부를 확인한 후, 로그 변환이나 차분(Differencing)을 시행하여 정상 시계열로 변환한 뒤 ARIMA, VAR 또는 Machine Learning 기반 시계열 예측 모델에 적용합니다.",
+        keywords: ["기초 통계 방법론", "부동산 통계 산정론"]
+    },
+    {
+        type: "qa",
+        id: "q4",
+        q: "Q4. Python, R, SAS를 활용한 한국부동산원 통계 업무 자동화 아이디어를 제시해보세요.",
+        a: "A. 대용량 부동산 DB 연계 및 대규모 검증 작업에는 SAS를 활용하여 안정적인 통계 집계를 수행할 수 있으며,\nPython의 Pandas 및 Geopandas를 사용하여 이상치(IQR 기반) 자동 정제 및 공간 데이터(GIS) 마핑 프로세스를 자동화할 수 있습니다.\n또한 R의 시계열 패키지 및 가설검정 자동화 라이브러리를 결합하면 데이터 수집-이상치 검증-지수 산출-자동 보고서 생성으로 이어지는 단단한 통계 파이프라인을 구축할 수 있습니다.",
+        keywords: ["데이터 처리 및 프로그램", "데이터 품질 관리"]
+    }
+];
+
+function renderFlowTab() {
+    const container = document.getElementById('tab-flow');
+    container.innerHTML = '';
+    rawData.forEach(item => {
+        if (item.type === 'concept') {
+            const div = document.createElement('div');
+            div.className = 'concept-card';
+            div.dataset.id = item.id;
+            div.innerHTML = `<h3>${item.title}</h3><div>${item.content}</div>`;
+            container.appendChild(div);
+        } else if (item.type === 'qa') {
+            const div = document.createElement('div');
+            div.className = 'card';
+            div.dataset.id = item.id;
+            div.innerHTML = `
+                <div class="card-header" onclick="toggleCard(this)">
+                    <span class="question">${item.q}</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="card-body">${item.a}</div>
+            `;
+            container.appendChild(div);
+        }
+    });
+}
+
+function renderGroupTab() {
+    const container = document.getElementById('tab-group');
+    container.innerHTML = '';
+    
+    const groups = {};
+    rawData.forEach(item => {
+        if (item.keywords) {
+            item.keywords.forEach(kw => {
+                if (!groups[kw]) groups[kw] = [];
+                groups[kw].push(item);
+            });
+        }
+    });
+
+    for (const [groupName, items] of Object.entries(groups)) {
+        const groupDiv = document.createElement('div');
+        groupDiv.className = 'keyword-group';
+        
+        let itemsHtml = '';
+        items.forEach(item => {
+            if (item.type === 'concept') {
+                itemsHtml += `
+                    <div class="card concept-accordion">
+                        <div class="card-header" onclick="toggleCard(this)">
+                            <span class="question">${item.title}</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="card-body">${item.content}</div>
+                    </div>
+                `;
+            } else {
+                itemsHtml += `
+                    <div class="card">
+                        <div class="card-header" onclick="toggleCard(this)">
+                            <span class="question">${item.q}</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="card-body">${item.a}</div>
+                    </div>
+                `;
+            }
+        });
+
+        groupDiv.innerHTML = `
+            <div class="keyword-header" onclick="toggleGroup(this)">
+                <span>${groupName}</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="keyword-content">${itemsHtml}</div>
+        `;
+        container.appendChild(groupDiv);
+    }
+}
+
+function renderConceptTab() {
+    const container = document.getElementById('tab-concept');
+    container.innerHTML = '';
+    rawData.filter(item => item.type === 'concept').forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'concept-card';
+        div.innerHTML = `<h3>${item.title}</h3><div>${item.content}</div>`;
+        container.appendChild(div);
+    });
+}
+
+function toggleCard(headerEl) {
+    const card = headerEl.parentElement;
+    card.classList.toggle('open');
+}
+
+function toggleGroup(headerEl) {
+    const group = headerEl.parentElement;
+    group.classList.toggle('open');
+}
+
+function switchTab(event, tabId) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    
+    event.currentTarget.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+}
+
+function expandAll() {
+    document.querySelectorAll('.card').forEach(card => card.classList.add('open'));
+    document.querySelectorAll('.keyword-group').forEach(group => group.classList.add('open'));
+}
+
+function collapseAll() {
+    document.querySelectorAll('.card').forEach(card => card.classList.remove('open'));
+    document.querySelectorAll('.keyword-group').forEach(group => group.classList.remove('open'));
+}
+
+function handleSearch() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    const activeTab = document.querySelector('.tab-content.active');
+    const cards = activeTab.querySelectorAll('.card, .concept-card, .keyword-group');
+    let hasResult = false;
+
+    cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(query)) {
+            card.style.display = '';
+            hasResult = true;
+            if (card.classList.contains('card') || card.classList.contains('keyword-group')) {
+                if (query !== '') card.classList.add('open');
+            }
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    document.getElementById('noResults').style.display = hasResult ? 'none' : 'block';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderFlowTab();
+    renderGroupTab();
+    renderConceptTab();
+});
+</script>
+</body>
+</html>
